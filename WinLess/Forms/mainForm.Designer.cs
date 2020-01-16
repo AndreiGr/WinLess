@@ -59,8 +59,13 @@
             this.refreshDirectoryButton = new System.Windows.Forms.Button();
             this.removeDirectoryButton = new System.Windows.Forms.Button();
             this.compilerTabPage = new System.Windows.Forms.TabPage();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.clearCompileResultsButton = new System.Windows.Forms.Button();
             this.compileResultsDataGridView = new System.Windows.Forms.DataGridView();
+            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FullOutputPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.resultTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compileResultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -68,10 +73,6 @@
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIconMenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
-            this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FullOutputPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.resultTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.directoryBindingSource)).BeginInit();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileBindingSource)).BeginInit();
@@ -361,6 +362,7 @@
             // compilerTabPage
             // 
             this.compilerTabPage.BackColor = System.Drawing.Color.Transparent;
+            this.compilerTabPage.Controls.Add(this.progressBar1);
             this.compilerTabPage.Controls.Add(this.clearCompileResultsButton);
             this.compilerTabPage.Controls.Add(this.compileResultsDataGridView);
             this.compilerTabPage.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -370,6 +372,13 @@
             this.compilerTabPage.Size = new System.Drawing.Size(816, 343);
             this.compilerTabPage.TabIndex = 1;
             this.compilerTabPage.Text = "Compiler";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(7, 320);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(722, 12);
+            this.progressBar1.TabIndex = 2;
             // 
             // clearCompileResultsButton
             // 
@@ -421,6 +430,41 @@
             this.compileResultsDataGridView.ShowEditingIcon = false;
             this.compileResultsDataGridView.Size = new System.Drawing.Size(804, 302);
             this.compileResultsDataGridView.TabIndex = 0;
+            // 
+            // timeDataGridViewTextBoxColumn
+            // 
+            this.timeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.timeDataGridViewTextBoxColumn.DataPropertyName = "TimeString";
+            this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
+            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
+            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.timeDataGridViewTextBoxColumn.Width = 53;
+            // 
+            // fileDataGridViewTextBoxColumn
+            // 
+            this.fileDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.fileDataGridViewTextBoxColumn.DataPropertyName = "FullPath";
+            this.fileDataGridViewTextBoxColumn.HeaderText = "File";
+            this.fileDataGridViewTextBoxColumn.Name = "fileDataGridViewTextBoxColumn";
+            this.fileDataGridViewTextBoxColumn.ReadOnly = true;
+            this.fileDataGridViewTextBoxColumn.Width = 46;
+            // 
+            // FullOutputPath
+            // 
+            this.FullOutputPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.FullOutputPath.DataPropertyName = "FullOutputPath";
+            this.FullOutputPath.HeaderText = "Output";
+            this.FullOutputPath.Name = "FullOutputPath";
+            this.FullOutputPath.ReadOnly = true;
+            this.FullOutputPath.Width = 62;
+            // 
+            // resultTextDataGridViewTextBoxColumn
+            // 
+            this.resultTextDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.resultTextDataGridViewTextBoxColumn.DataPropertyName = "ResultText";
+            this.resultTextDataGridViewTextBoxColumn.HeaderText = "Compiler Result";
+            this.resultTextDataGridViewTextBoxColumn.Name = "resultTextDataGridViewTextBoxColumn";
+            this.resultTextDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // compileResultBindingSource
             // 
@@ -475,41 +519,6 @@
             this.logoPictureBox.Size = new System.Drawing.Size(849, 100);
             this.logoPictureBox.TabIndex = 9;
             this.logoPictureBox.TabStop = false;
-            // 
-            // timeDataGridViewTextBoxColumn
-            // 
-            this.timeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.timeDataGridViewTextBoxColumn.DataPropertyName = "TimeString";
-            this.timeDataGridViewTextBoxColumn.HeaderText = "Time";
-            this.timeDataGridViewTextBoxColumn.Name = "timeDataGridViewTextBoxColumn";
-            this.timeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.timeDataGridViewTextBoxColumn.Width = 55;
-            // 
-            // fileDataGridViewTextBoxColumn
-            // 
-            this.fileDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.fileDataGridViewTextBoxColumn.DataPropertyName = "FullPath";
-            this.fileDataGridViewTextBoxColumn.HeaderText = "File";
-            this.fileDataGridViewTextBoxColumn.Name = "fileDataGridViewTextBoxColumn";
-            this.fileDataGridViewTextBoxColumn.ReadOnly = true;
-            this.fileDataGridViewTextBoxColumn.Width = 48;
-            // 
-            // FullOutputPath
-            // 
-            this.FullOutputPath.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.FullOutputPath.DataPropertyName = "FullOutputPath";
-            this.FullOutputPath.HeaderText = "Output";
-            this.FullOutputPath.Name = "FullOutputPath";
-            this.FullOutputPath.ReadOnly = true;
-            this.FullOutputPath.Width = 64;
-            // 
-            // resultTextDataGridViewTextBoxColumn
-            // 
-            this.resultTextDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.resultTextDataGridViewTextBoxColumn.DataPropertyName = "ResultText";
-            this.resultTextDataGridViewTextBoxColumn.HeaderText = "Compiler Result";
-            this.resultTextDataGridViewTextBoxColumn.Name = "resultTextDataGridViewTextBoxColumn";
-            this.resultTextDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // mainForm
             // 
@@ -588,6 +597,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fileDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn FullOutputPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn resultTextDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

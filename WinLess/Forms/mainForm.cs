@@ -23,11 +23,14 @@ namespace WinLess
                 return activeOrInActiveMainForm;
             }
         }
-        
+
         private delegate void AddCompileResultDelegate(Models.CompileCommandResult result);
         private bool finishedLoading;
         private VistaFolderBrowserDialog folderBrowserDialog;
         private VistaSaveFileDialog outputFileDialog;
+
+        private int successCount = 0;
+        private int errorCount = 0;
 
         #region mainForm init and shutdown
 
@@ -64,14 +67,14 @@ namespace WinLess
             {
                 Program.Settings.DirectoryList.ClearDirectories();
             }
-            
+
             //load directories specified in arguments
             foreach (string directoryPath in args.DirectoryPaths)
             {
-                if(System.IO.Directory.Exists(directoryPath))
+                if (System.IO.Directory.Exists(directoryPath))
                 {
                     Models.Directory directory = Program.Settings.DirectoryList.AddDirectory(directoryPath);
-                    
+
                     foreach (Models.File file in directory.Files)
                     {
                         file.Minify = args.Minify;
@@ -243,13 +246,13 @@ namespace WinLess
             }
             filesDataGridView.EndEdit();
         }
-        
+
         private void filesDataGridView_DataChanged()
         {
             List<Models.File> files = (List<Models.File>)filesDataGridView.DataSource;
             files.Sort((x, y) => string.Compare(x.FullPath, y.FullPath));
             ((CurrencyManager)filesDataGridView.BindingContext[filesDataGridView.DataSource]).Refresh();
-        }  
+        }
 
         private void filesDataGridView_OpenSelectedFile()
         {
@@ -309,14 +312,14 @@ namespace WinLess
             Models.File file = (Models.File)cell.OwningRow.DataBoundItem;
             FileInfo fileInfo = new FileInfo(file.OutputPath);
 
-			outputFileDialog.InitialDirectory = fileInfo.DirectoryName;
-			outputFileDialog.FileName = fileInfo.Name;
-			if (outputFileDialog.ShowDialog() == true)
-			{
-				file.OutputPath = outputFileDialog.FileName;
+            outputFileDialog.InitialDirectory = fileInfo.DirectoryName;
+            outputFileDialog.FileName = fileInfo.Name;
+            if (outputFileDialog.ShowDialog() == true)
+            {
+                file.OutputPath = outputFileDialog.FileName;
                 filesDataGridView_DataChanged();
                 Program.Settings.SaveSettings();
-			}
+            }
         }
 
         #endregion
@@ -351,6 +354,8 @@ namespace WinLess
 
         private void compileSelectedButton_Click(object sender, EventArgs e)
         {
+            progressBar1.Visible = true;
+            activeOrInActiveMainForm.tabControl.SelectTab("compilerTabPage");
             CompileSelectedFiles();
         }
 
@@ -366,7 +371,7 @@ namespace WinLess
         #region compilerTabPage
 
         #region compileResultsDataGridView
-        
+
         public void AddCompileResult(Models.CompileCommandResult result)
         {
             if (InvokeRequired)
@@ -375,7 +380,8 @@ namespace WinLess
                 return;
             }
 
-            if (result.IsSuccess){
+            if (result.IsSuccess)
+            {
                 result.ResultText = "success";
             }
 
@@ -385,10 +391,12 @@ namespace WinLess
 
             if (result.IsSuccess && Program.Settings.ShowSuccessMessages)
             {
+                successCount += 1;
                 ShowSuccessNotification("Successful compile", result.ResultText);
             }
-            else if(!result.IsSuccess)
+            else if (!result.IsSuccess)
             {
+                errorCount += 1;
                 ShowErrorNotification("Compile error", result.ResultText);
             }
         }
@@ -404,10 +412,11 @@ namespace WinLess
 
         private void clearCompileResultsButton_Click(object sender, EventArgs e)
         {
+            progressBar1.Visible = false;
             compileResultsDataGridView.DataSource = new List<Models.CompileCommandResult>();
             compileResultsDataGridView_DataChanged();
         }
-        
+
         #endregion
 
         #endregion
@@ -454,7 +463,8 @@ namespace WinLess
             this.ShowInTaskbar = true;
         }
 
-        private void ShowSuccessNotification(string title, string message){
+        private void ShowSuccessNotification(string title, string message)
+        {
             notifyIcon.ShowBalloonTip(500, title, message, ToolTipIcon.Info);
         }
 
@@ -501,14 +511,40 @@ namespace WinLess
             // Retrieve list of files from data grid
             List<Models.File> files = (List<Models.File>)filesDataGridView.DataSource;
 
+            //set progressbar step
+            progressBar1.Maximum = files.Count;
+            progressBar1.Step = 1;
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += new DoWorkEventHandler(DoWork);
+            worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkCompleted);
+            worker.RunWorkerAsync(files);
+            Cursor = Cursors.WaitCursor;
+
+        }
+
+        private void DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<Models.File> files = (List<Models.File>)e.Argument;
             // Compile files one by one
             foreach (Models.File file in files)
             {
                 if (file.Enabled)
                 {
                     LessCompiler.Compile(file.FullPath, file.OutputPath, file.Minify);
+                    progressBar1.PerformStep();
                 }
             }
+
+        }
+
+        private void WorkCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Cursor = Cursors.Default;
+            if (errorCount > 0)
+                ShowSuccessNotification("Job finished", "The job finished, but we encountered " + errorCount + " errors.");
+            else
+                ShowSuccessNotification("Job finished", "The job finished succesfully, all the files were compiled");
         }
 
         #endregion
