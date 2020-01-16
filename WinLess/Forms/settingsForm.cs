@@ -22,6 +22,7 @@ namespace WinLess
             startMinimizedCheckBox.Checked = Program.Settings.StartMinified;
             useGloballyInstalledLessCheckbox.Checked = Program.Settings.UseGloballyInstalledLess;
             defaultMinifyCheckBox.Checked = Program.Settings.DefaultMinify;
+            saveMinifiedFilesSeparatelyCheckBox.Checked = Program.Settings.SaveSeparately;
             compileOnSaveCheckBox.Checked = Program.Settings.CompileOnSave;
             showSuccessMessagesCheckbox.Checked = Program.Settings.ShowSuccessMessages;
         }
@@ -32,6 +33,7 @@ namespace WinLess
             Program.Settings.StartMinified = startMinimizedCheckBox.Checked;
             Program.Settings.UseGloballyInstalledLess = useGloballyInstalledLessCheckbox.Checked;
             Program.Settings.DefaultMinify = defaultMinifyCheckBox.Checked;
+            Program.Settings.SaveSeparately = saveMinifiedFilesSeparatelyCheckBox.Checked;
             Program.Settings.CompileOnSave = compileOnSaveCheckBox.Checked;
             Program.Settings.ShowSuccessMessages = showSuccessMessagesCheckbox.Checked;
             Program.Settings.SaveSettings();

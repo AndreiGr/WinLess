@@ -16,8 +16,22 @@ namespace WinLess
         {
             try
             {
-                CompileCommandResult compileResult = ExecuteCompileCommand(lessFile, cssFile, minify);
-                mainForm.ActiveOrInActiveMainForm.AddCompileResult(compileResult);
+                List<CompileCommandResult> compileResults = new List<CompileCommandResult>();
+                if (Program.Settings.SaveSeparately && minify == true)
+                {
+                    compileResults.Add(ExecuteCompileCommand(lessFile, cssFile, false));
+                    cssFile = cssFile.Replace(".css", ".min.css");
+                    compileResults.Add(ExecuteCompileCommand(lessFile, cssFile, true));
+                }
+                else
+                {
+                    compileResults.Add(ExecuteCompileCommand(lessFile, cssFile, minify));
+                }
+
+                foreach (var compileResult in compileResults)
+                {
+                    mainForm.ActiveOrInActiveMainForm.AddCompileResult(compileResult);
+                }
             }
             catch (Exception e)
             {
@@ -59,6 +73,7 @@ namespace WinLess
 
             CompileCommandResult result = new CompileCommandResult(ExecuteLessCommand(arguments));
             result.FullPath = lessFile;
+            result.FullOutputPath = cssFile;
 
             return result;
         }

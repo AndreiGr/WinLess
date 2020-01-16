@@ -32,13 +32,14 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.generalGroupBox = new System.Windows.Forms.GroupBox();
+            this.useGloballyInstalledLessCheckbox = new System.Windows.Forms.CheckBox();
             this.startMinimizedCheckBox = new System.Windows.Forms.CheckBox();
             this.startWithWindowsCheckBox = new System.Windows.Forms.CheckBox();
             this.compilingGroupBox = new System.Windows.Forms.GroupBox();
+            this.defaultMinifyCheckBox = new System.Windows.Forms.CheckBox();
             this.showSuccessMessagesCheckbox = new System.Windows.Forms.CheckBox();
             this.compileOnSaveCheckBox = new System.Windows.Forms.CheckBox();
-            this.defaultMinifyCheckBox = new System.Windows.Forms.CheckBox();
-            this.useGloballyInstalledLessCheckbox = new System.Windows.Forms.CheckBox();
+            this.saveMinifiedFilesSeparatelyCheckBox = new System.Windows.Forms.CheckBox();
             this.generalGroupBox.SuspendLayout();
             this.compilingGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -68,12 +69,22 @@
             this.generalGroupBox.Controls.Add(this.useGloballyInstalledLessCheckbox);
             this.generalGroupBox.Controls.Add(this.startMinimizedCheckBox);
             this.generalGroupBox.Controls.Add(this.startWithWindowsCheckBox);
-            this.generalGroupBox.Location = new System.Drawing.Point(13, 13);
+            this.generalGroupBox.Location = new System.Drawing.Point(13, 9);
             this.generalGroupBox.Name = "generalGroupBox";
             this.generalGroupBox.Size = new System.Drawing.Size(259, 91);
             this.generalGroupBox.TabIndex = 2;
             this.generalGroupBox.TabStop = false;
             this.generalGroupBox.Text = "General";
+            // 
+            // useGloballyInstalledLessCheckbox
+            // 
+            this.useGloballyInstalledLessCheckbox.AutoSize = true;
+            this.useGloballyInstalledLessCheckbox.Location = new System.Drawing.Point(7, 67);
+            this.useGloballyInstalledLessCheckbox.Name = "useGloballyInstalledLessCheckbox";
+            this.useGloballyInstalledLessCheckbox.Size = new System.Drawing.Size(145, 17);
+            this.useGloballyInstalledLessCheckbox.TabIndex = 2;
+            this.useGloballyInstalledLessCheckbox.Text = "Use globally installed less";
+            this.useGloballyInstalledLessCheckbox.UseVisualStyleBackColor = true;
             // 
             // startMinimizedCheckBox
             // 
@@ -97,22 +108,33 @@
             // 
             // compilingGroupBox
             // 
+            this.compilingGroupBox.Controls.Add(this.defaultMinifyCheckBox);
             this.compilingGroupBox.Controls.Add(this.showSuccessMessagesCheckbox);
             this.compilingGroupBox.Controls.Add(this.compileOnSaveCheckBox);
-            this.compilingGroupBox.Controls.Add(this.defaultMinifyCheckBox);
-            this.compilingGroupBox.Location = new System.Drawing.Point(13, 127);
+            this.compilingGroupBox.Controls.Add(this.saveMinifiedFilesSeparatelyCheckBox);
+            this.compilingGroupBox.Location = new System.Drawing.Point(13, 106);
             this.compilingGroupBox.Name = "compilingGroupBox";
-            this.compilingGroupBox.Size = new System.Drawing.Size(259, 100);
+            this.compilingGroupBox.Size = new System.Drawing.Size(259, 121);
             this.compilingGroupBox.TabIndex = 3;
             this.compilingGroupBox.TabStop = false;
             this.compilingGroupBox.Text = "Compiling";
             // 
+            // defaultMinifyCheckBox
+            // 
+            this.defaultMinifyCheckBox.AutoSize = true;
+            this.defaultMinifyCheckBox.Location = new System.Drawing.Point(6, 20);
+            this.defaultMinifyCheckBox.Name = "defaultMinifyCheckBox";
+            this.defaultMinifyCheckBox.Size = new System.Drawing.Size(102, 17);
+            this.defaultMinifyCheckBox.TabIndex = 3;
+            this.defaultMinifyCheckBox.Text = "Minify by default";
+            this.defaultMinifyCheckBox.UseVisualStyleBackColor = true;
+            // 
             // showSuccessMessagesCheckbox
             // 
             this.showSuccessMessagesCheckbox.AutoSize = true;
-            this.showSuccessMessagesCheckbox.Location = new System.Drawing.Point(7, 68);
+            this.showSuccessMessagesCheckbox.Location = new System.Drawing.Point(7, 89);
             this.showSuccessMessagesCheckbox.Name = "showSuccessMessagesCheckbox";
-            this.showSuccessMessagesCheckbox.Size = new System.Drawing.Size(200, 17);
+            this.showSuccessMessagesCheckbox.Size = new System.Drawing.Size(205, 17);
             this.showSuccessMessagesCheckbox.TabIndex = 2;
             this.showSuccessMessagesCheckbox.Text = "Show message on successful compile";
             this.showSuccessMessagesCheckbox.UseVisualStyleBackColor = true;
@@ -120,32 +142,22 @@
             // compileOnSaveCheckBox
             // 
             this.compileOnSaveCheckBox.AutoSize = true;
-            this.compileOnSaveCheckBox.Location = new System.Drawing.Point(7, 44);
+            this.compileOnSaveCheckBox.Location = new System.Drawing.Point(7, 66);
             this.compileOnSaveCheckBox.Name = "compileOnSaveCheckBox";
             this.compileOnSaveCheckBox.Size = new System.Drawing.Size(209, 17);
             this.compileOnSaveCheckBox.TabIndex = 1;
             this.compileOnSaveCheckBox.Text = "Automatically compile files when saved";
             this.compileOnSaveCheckBox.UseVisualStyleBackColor = true;
             // 
-            // defaultMinifyCheckBox
+            // saveMinifiedFilesSeparatelyCheckBox
             // 
-            this.defaultMinifyCheckBox.AutoSize = true;
-            this.defaultMinifyCheckBox.Location = new System.Drawing.Point(7, 21);
-            this.defaultMinifyCheckBox.Name = "defaultMinifyCheckBox";
-            this.defaultMinifyCheckBox.Size = new System.Drawing.Size(102, 17);
-            this.defaultMinifyCheckBox.TabIndex = 0;
-            this.defaultMinifyCheckBox.Text = "Minify by default";
-            this.defaultMinifyCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // useGloballyInstalledLessCheckbox
-            // 
-            this.useGloballyInstalledLessCheckbox.AutoSize = true;
-            this.useGloballyInstalledLessCheckbox.Location = new System.Drawing.Point(7, 67);
-            this.useGloballyInstalledLessCheckbox.Name = "useGloballyInstalledLessCheckbox";
-            this.useGloballyInstalledLessCheckbox.Size = new System.Drawing.Size(145, 17);
-            this.useGloballyInstalledLessCheckbox.TabIndex = 2;
-            this.useGloballyInstalledLessCheckbox.Text = "Use globally installed less";
-            this.useGloballyInstalledLessCheckbox.UseVisualStyleBackColor = true;
+            this.saveMinifiedFilesSeparatelyCheckBox.AutoSize = true;
+            this.saveMinifiedFilesSeparatelyCheckBox.Location = new System.Drawing.Point(7, 43);
+            this.saveMinifiedFilesSeparatelyCheckBox.Name = "saveMinifiedFilesSeparatelyCheckBox";
+            this.saveMinifiedFilesSeparatelyCheckBox.Size = new System.Drawing.Size(212, 17);
+            this.saveMinifiedFilesSeparatelyCheckBox.TabIndex = 0;
+            this.saveMinifiedFilesSeparatelyCheckBox.Text = "Save minified files separately (*.min.css)";
+            this.saveMinifiedFilesSeparatelyCheckBox.UseVisualStyleBackColor = true;
             // 
             // settingsForm
             // 
@@ -175,9 +187,10 @@
         private System.Windows.Forms.CheckBox startMinimizedCheckBox;
         private System.Windows.Forms.CheckBox startWithWindowsCheckBox;
         private System.Windows.Forms.GroupBox compilingGroupBox;
-        private System.Windows.Forms.CheckBox defaultMinifyCheckBox;
+        private System.Windows.Forms.CheckBox saveMinifiedFilesSeparatelyCheckBox;
         private System.Windows.Forms.CheckBox compileOnSaveCheckBox;
         private System.Windows.Forms.CheckBox showSuccessMessagesCheckbox;
         private System.Windows.Forms.CheckBox useGloballyInstalledLessCheckbox;
+        private System.Windows.Forms.CheckBox defaultMinifyCheckBox;
     }
 }

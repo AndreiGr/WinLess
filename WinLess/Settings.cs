@@ -27,6 +27,7 @@ namespace WinLess
         public bool CompileOnSave { get; set; }
         public bool ShowSuccessMessages { get; set; }
         public bool StartMinified { get; set; }
+        public bool SaveSeparately { get; set; }
         public bool UseGloballyInstalledLess { get; set; }
 
         private bool startWithWindows;

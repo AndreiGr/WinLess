@@ -39,6 +39,8 @@
             this.authorNameLabel = new System.Windows.Forms.Label();
             this.graphicalDesignLabel = new System.Windows.Forms.Label();
             this.authorLabel = new System.Windows.Forms.Label();
+            this.smallContributionLabel = new System.Windows.Forms.Label();
+            this.smallContributionNameLabel = new System.Windows.Forms.Label();
             this.versionGroupBox.SuspendLayout();
             this.creditsGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -94,13 +96,15 @@
             // 
             // creditsGroupBox
             // 
+            this.creditsGroupBox.Controls.Add(this.smallContributionNameLabel);
+            this.creditsGroupBox.Controls.Add(this.smallContributionLabel);
             this.creditsGroupBox.Controls.Add(this.graphicalDesignNameLabel);
             this.creditsGroupBox.Controls.Add(this.authorNameLabel);
             this.creditsGroupBox.Controls.Add(this.graphicalDesignLabel);
             this.creditsGroupBox.Controls.Add(this.authorLabel);
             this.creditsGroupBox.Location = new System.Drawing.Point(13, 78);
             this.creditsGroupBox.Name = "creditsGroupBox";
-            this.creditsGroupBox.Size = new System.Drawing.Size(289, 66);
+            this.creditsGroupBox.Size = new System.Drawing.Size(289, 80);
             this.creditsGroupBox.TabIndex = 2;
             this.creditsGroupBox.TabStop = false;
             this.creditsGroupBox.Text = "Credits";
@@ -141,11 +145,29 @@
             this.authorLabel.TabIndex = 0;
             this.authorLabel.Text = "Author:";
             // 
+            // smallContributionLabel
+            // 
+            this.smallContributionLabel.AutoSize = true;
+            this.smallContributionLabel.Location = new System.Drawing.Point(6, 55);
+            this.smallContributionLabel.Name = "smallContributionLabel";
+            this.smallContributionLabel.Size = new System.Drawing.Size(93, 13);
+            this.smallContributionLabel.TabIndex = 4;
+            this.smallContributionLabel.Text = "Small contribution:";
+            // 
+            // smallContributionNameLabel
+            // 
+            this.smallContributionNameLabel.AutoSize = true;
+            this.smallContributionNameLabel.Location = new System.Drawing.Point(103, 55);
+            this.smallContributionNameLabel.Name = "smallContributionNameLabel";
+            this.smallContributionNameLabel.Size = new System.Drawing.Size(76, 13);
+            this.smallContributionNameLabel.TabIndex = 5;
+            this.smallContributionNameLabel.Text = "Andrei Grigoriu";
+            // 
             // aboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 154);
+            this.ClientSize = new System.Drawing.Size(313, 170);
             this.Controls.Add(this.creditsGroupBox);
             this.Controls.Add(this.versionGroupBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -171,6 +193,7 @@
         private System.Windows.Forms.Label authorLabel;
         private System.Windows.Forms.Label graphicalDesignNameLabel;
         private System.Windows.Forms.Label authorNameLabel;
-
+        private System.Windows.Forms.Label smallContributionNameLabel;
+        private System.Windows.Forms.Label smallContributionLabel;
     }
 }

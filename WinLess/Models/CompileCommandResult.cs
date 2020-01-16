@@ -21,6 +21,13 @@ namespace WinLess.Models
             set;
         }
 
+        public string FullOutputPath
+        {
+            get;
+            set;
+        }
+
+
         #endregion
     }
 }
